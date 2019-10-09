@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Image } from "react-native";
 import { createAppContainer } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -7,6 +7,8 @@ import { createBottomTabNavigator } from "react-navigation-tabs";
 import AllEvents from "./src/Events";
 import Detail from "./src/Details";
 import Maps from "./src/Maps";
+
+import Icon from "react-native-vector-icons/FontAwesome";
 
 const Details = createStackNavigator(
   {
@@ -22,19 +24,59 @@ const Details = createStackNavigator(
   }
 );
 
-const Events = createStackNavigator({
-  Event: {
-    screen: AllEvents
-  }
-});
-
-const BottomTabs = createBottomTabNavigator({
-  Event: {
-    screen: Events
+const Events = createStackNavigator(
+  {
+    Event: {
+      screen: AllEvents
+    }
   },
-  Details: {
-    screen: Details
+  {
+    headerLayoutPreset: "center",
+    defaultNavigationOptions: () => ({
+      headerTitle: (
+        <Image
+          source={require("./assets/logo.png")}
+          resizeMode="contain"
+          style={{
+            width: 70
+          }}
+        />
+      )
+    })
   }
-});
+);
+
+const BottomTabs = createBottomTabNavigator(
+  {
+    Event: {
+      screen: Events,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <Icon name="music" color={tintColor} size={20} />;
+        }
+      })
+    },
+    Details: {
+      screen: Details,
+      navigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, tintColor }) => {
+          return <Icon name="plus" color={tintColor} size={20} />;
+        }
+      })
+    }
+  },
+  {
+    tabBarOptions: {
+      activeTintColor: "#ff4757",
+      inactiveTintColor: "#000",
+      labelStyle: {
+        fontSize: 13
+      },
+      style: {
+        backgroundColor: "#fff"
+      }
+    }
+  }
+);
 
 export default createAppContainer(BottomTabs);

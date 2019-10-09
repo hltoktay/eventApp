@@ -3,13 +3,11 @@ import { Text, View, StyleSheet, Button } from "react-native";
 
 export default class Detail extends Component {
   render() {
+    const params = this.props.navigation.state.params;
+
     return (
       <View style={styles.container}>
-        <Text> textInComponent </Text>
-        <Button
-          title="Go to Map"
-          onPress={() => this.props.navigation.navigate("Maps")}
-        />
+        <Text>{params.eventName}</Text>
       </View>
     );
   }
@@ -17,9 +15,6 @@ export default class Detail extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "red",
-    alignItems: "center",
-    justifyContent: "center"
+    flex: 1
   }
 });
