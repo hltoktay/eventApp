@@ -20,6 +20,7 @@ const Details = createStackNavigator(
     }
   },
   {
+    initialRouteName: "Details",
     headerMode: "none"
   }
 );

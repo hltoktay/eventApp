@@ -7,7 +7,7 @@ export default class Detail extends Component {
 
     return (
       <View style={styles.container}>
-        <Text>{params.eventName}</Text>
+        {/* <Text>{params.eventName}</Text> */}
       </View>
     );
   }
