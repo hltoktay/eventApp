@@ -1,12 +1,13 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
-import { createAppContainer } from "react-navigation";
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
 
 import AllEvents from "./src/Events";
 import Detail from "./src/Details";
 import Maps from "./src/Maps";
+import Register from "./src/Register";
 
 import Icon from "react-native-vector-icons/FontAwesome";
 
@@ -17,6 +18,9 @@ const Details = createStackNavigator(
     },
     Maps: {
       screen: Maps
+    },
+    Register: {
+      screen: Register
     }
   },
   {
@@ -80,4 +84,9 @@ const BottomTabs = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(BottomTabs);
+export default createAppContainer(
+  createSwitchNavigator({
+    Events: Events,
+    AppStack: BottomTabs
+  })
+);
